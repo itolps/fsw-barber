@@ -13,6 +13,15 @@ const handler = NextAuth({
       allowDangerousEmailAccountLinking: true,
     }),
   ],
+  callbacks: {
+    async session({ session, user }) {
+      session.user = {
+        ...session.user,
+        id: user.id,
+      } as any
+      return session
+    },
+  },
 })
 
 export { handler as GET, handler as POST }
