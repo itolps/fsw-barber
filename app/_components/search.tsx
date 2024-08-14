@@ -24,8 +24,9 @@ const Search = () => {
     },
   })
   const router = useRouter()
+
   const handleSubmit = (data: z.infer<typeof formSchema>) => {
-    router.push(`/barbershops?search=${data.title}`)
+    router.push(`/barbershops?title=${data.title}`)
   }
 
   return (
@@ -37,7 +38,11 @@ const Search = () => {
           render={({ field }) => (
             <FormItem className="w-full">
               <FormControl>
-                <Input placeholder="Faça sua busca..." {...field} />
+                <Input
+                  placeholder="Faça sua busca..."
+                  {...field}
+                  className="w-full"
+                />
               </FormControl>
               <FormMessage />
             </FormItem>

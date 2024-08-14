@@ -9,12 +9,15 @@ const SignInDialog = () => {
   return (
     <>
       <DialogHeader>
-        <DialogTitle>Faça seu login na plataforma</DialogTitle>
-        <DialogDescription>Conecte-se com Google</DialogDescription>
+        <DialogTitle>Faça login na plataforma</DialogTitle>
+        <DialogDescription>
+          Conecte-se usando sua conta do Google.
+        </DialogDescription>
       </DialogHeader>
+
       <Button
         variant="outline"
-        className="gap-2 font-bold"
+        className="gap-1 font-bold"
         onClick={handleLoginWithGoogleClick}
       >
         <Image

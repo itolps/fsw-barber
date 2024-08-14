@@ -3,18 +3,14 @@ interface QuickSearchOption {
   title: string
 }
 
-export const quickSearchOption: QuickSearchOption[] = [
-  {
-    imageUrl: "/barba.svg",
-    title: "Barba",
-  },
+export const quickSearchOptions: QuickSearchOption[] = [
   {
     imageUrl: "/cabelo.svg",
     title: "Cabelo",
   },
   {
-    imageUrl: "/sobrancelha.svg",
-    title: "Sobrancelha",
+    imageUrl: "/barba.svg",
+    title: "Barba",
   },
   {
     imageUrl: "/acabamento.svg",
@@ -23,6 +19,10 @@ export const quickSearchOption: QuickSearchOption[] = [
   {
     imageUrl: "/massagem.svg",
     title: "Massagem",
+  },
+  {
+    imageUrl: "/sobrancelha.svg",
+    title: "Sobrancelha",
   },
   {
     imageUrl: "/hidratacao.svg",

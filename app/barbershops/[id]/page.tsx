@@ -1,19 +1,22 @@
+import PhoneItem from "@/app/_components/phone-item"
+import ServiceItem from "@/app/_components/service-item"
+import SidebarSheet from "@/app/_components/sidebar-sheet"
+import { Button } from "@/app/_components/ui/button"
+import { Sheet, SheetTrigger } from "@/app/_components/ui/sheet"
+import { db } from "@/app/_lib/prisma"
 import { ChevronLeftIcon, MapPinIcon, MenuIcon, StarIcon } from "lucide-react"
-import { Button } from "../../_components/ui/button"
-import { db } from "../../_lib/prisma"
 import Image from "next/image"
 import Link from "next/link"
 import { notFound } from "next/navigation"
-import ServiceItem from "../../_components/service-item"
-import PhoneItem from "../../_components/phone-item"
-import { Sheet, SheetTrigger } from "../../_components/ui/sheet"
-import SideBarSheet from "../../_components/sidebar-sheet"
 
 interface BarbershopPageProps {
-  params: { id: string }
+  params: {
+    id: string
+  }
 }
 
 const BarbershopPage = async ({ params }: BarbershopPageProps) => {
+  // chamar o meu banco de dados
   const barbershop = await db.barbershop.findUnique({
     where: {
       id: params.id,
@@ -32,10 +35,10 @@ const BarbershopPage = async ({ params }: BarbershopPageProps) => {
       {/* IMAGEM */}
       <div className="relative h-[250px] w-full">
         <Image
-          alt={barbershop?.name}
+          alt={barbershop.name}
+          src={barbershop?.imageUrl}
           fill
           className="object-cover"
-          src={barbershop?.imageUrl}
         />
 
         <Button
@@ -59,10 +62,11 @@ const BarbershopPage = async ({ params }: BarbershopPageProps) => {
               <MenuIcon />
             </Button>
           </SheetTrigger>
-          <SideBarSheet />
+          <SidebarSheet />
         </Sheet>
       </div>
-      {/* TITULO */}
+
+      {/* TÍTULO */}
       <div className="border-b border-solid p-5">
         <h1 className="mb-3 text-xl font-bold">{barbershop.name}</h1>
         <div className="mb-2 flex items-center gap-2">
@@ -79,21 +83,23 @@ const BarbershopPage = async ({ params }: BarbershopPageProps) => {
       {/* DESCRIÇÃO */}
       <div className="space-y-2 border-b border-solid p-5">
         <h2 className="text-xs font-bold uppercase text-gray-400">Sobre nós</h2>
-        <p className="text-justify text-sm">{barbershop.description}</p>
+        <p className="text-justify text-sm">{barbershop?.description}</p>
       </div>
+
       {/* SERVIÇOS */}
-      <div className="space-y-2 border-b border-solid p-5">
+      <div className="space-y-3 border-b border-solid p-5">
         <h2 className="text-xs font-bold uppercase text-gray-400">Serviços</h2>
         <div className="space-y-3">
           {barbershop.services.map((service) => (
             <ServiceItem
               key={service.id}
-              barbershop={barbershop}
-              service={service}
+              barbershop={JSON.parse(JSON.stringify(barbershop))}
+              service={JSON.parse(JSON.stringify(service))}
             />
           ))}
         </div>
       </div>
+
       {/* CONTATO */}
       <div className="space-y-3 p-5">
         {barbershop.phones.map((phone) => (
